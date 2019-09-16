@@ -20,6 +20,6 @@ namespace Model
 
         public string Pincode { get; set; }
 
-        public string ContactNumber { get; set; }
+        public string ContactNo { get; set; }
     }
 }

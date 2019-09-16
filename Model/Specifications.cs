@@ -13,7 +13,7 @@ namespace Model
         public string SeriesName { get; set; }
         public string Type { get; set; }
         public string Warranty { get; set; }
-        public int OrderNo { get; set; }
+        public int FormId { get; set; }
 
     }
 }

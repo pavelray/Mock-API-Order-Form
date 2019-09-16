@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Repository
 {
-    interface IFormDataRepository
+    public interface IFormDataRepository
     {
         FormData GetFormData();
-        bool SaveFormData();
+        FormData GetFormData(int id);
+        bool SaveFormData(FormData data);
     }
 }

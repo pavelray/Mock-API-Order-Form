@@ -8,6 +8,6 @@ namespace Model
     {
         public int Id { get; set; }
         public bool IsSameAsShipping { get; set; }
-        public int OrderNo { get; set; }
+        public int FormId { get; set; }
     }
 }

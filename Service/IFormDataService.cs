@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Service
 {
-    interface IFormDataService
+    public interface IFormDataService
     {
         FormData GetFormData();
-        bool SaveFormData();
+        FormData GetFormData(int id);
+        bool SaveFormData(FormData data);
     }
 }

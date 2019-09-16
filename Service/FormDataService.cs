@@ -2,20 +2,38 @@
 using System.Collections.Generic;
 using System.Text;
 using Model;
+using Repository;
 
 namespace Service
 {
     public class FormDataService: IFormDataService
     {
-        
-        public bool SaveFormData()
+        private IFormDataRepository _repository;
+
+        public FormDataService(IFormDataRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        FormData IFormDataService.GetFormData()
+        public bool SaveFormData(FormData data)
         {
-            throw new NotImplementedException();
+           return _repository.SaveFormData(data);
         }
+
+        public FormData GetFormData()
+        {
+            FormData data = _repository.GetFormData();
+
+            return data;
+        }
+
+        public FormData GetFormData(int id)
+        {
+            FormData data =  _repository.GetFormData(id);
+
+            return data;
+        }
+
+        
     }
 }
