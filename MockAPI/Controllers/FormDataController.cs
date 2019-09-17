@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
@@ -18,9 +19,16 @@ namespace MockAPI.Controllers
     public class FormDataController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            FormDataService service = new FormDataService(new FormDataRepository());
+            var data = service.GetFormData();
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+            return Ok(Newtonsoft.Json.JsonConvert.SerializeObject(data));
         }
 
         [HttpGet("{id}")]
@@ -28,7 +36,13 @@ namespace MockAPI.Controllers
         {
             FormDataService service = new FormDataService(new FormDataRepository());
             FormData data = service.GetFormData(System.Convert.ToInt32(id));
-            return StatusCode(200); ;
+
+            if (data == null)
+            {
+                return NotFound(id);
+            }
+            return Ok(data);
+
         }
 
 
@@ -37,9 +51,13 @@ namespace MockAPI.Controllers
         public ActionResult Post([FromBody] FormData data)
         {
             FormDataService service = new FormDataService(new FormDataRepository());
-            service.SaveFormData(data);
+            bool isSaved = service.SaveFormData(data);
 
-            return StatusCode(200);
+            if (!isSaved)
+            {
+                return StatusCode(400);
+            }
+            return Ok(isSaved);
         }
     }
 }

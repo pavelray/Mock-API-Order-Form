@@ -7,7 +7,7 @@ namespace Service
 {
     public interface IFormDataService
     {
-        FormData GetFormData();
+        IEnumerable<FormData> GetFormData();
         FormData GetFormData(int id);
         bool SaveFormData(FormData data);
     }

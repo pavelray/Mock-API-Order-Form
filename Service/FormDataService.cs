@@ -20,9 +20,9 @@ namespace Service
            return _repository.SaveFormData(data);
         }
 
-        public FormData GetFormData()
+        public IEnumerable<FormData> GetFormData()
         {
-            FormData data = _repository.GetFormData();
+            IEnumerable<FormData> data = _repository.GetFormData();
 
             return data;
         }

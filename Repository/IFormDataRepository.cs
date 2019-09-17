@@ -7,7 +7,7 @@ namespace Repository
 {
     public interface IFormDataRepository
     {
-        FormData GetFormData();
+        IEnumerable<FormData> GetFormData();
         FormData GetFormData(int id);
         bool SaveFormData(FormData data);
     }

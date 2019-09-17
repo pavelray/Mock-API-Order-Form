@@ -22,9 +22,21 @@ namespace Repository
             _connection = _dbFactory.GetConnection(DbServer.SQLSERVER);
         }
 
-        public FormData GetFormData()
+        public IEnumerable<FormData> GetFormData()
         {
-            throw new NotImplementedException();
+            string query = $"SELECT * FROM FormData";
+            List<FormData> formDatas = _dbFactory.GetData<FormData>(_connection, new CommandDefinition(query));
+
+            List<FormData> data = new List<FormData>();
+
+            foreach (FormData d in formDatas)
+            {
+                
+                FormData formData = (new FormDataRepository()).GetFormData(d.Id);
+                data.Add(formData);
+            }
+
+            return data;
         }
 
         public FormData GetFormData(int id)
