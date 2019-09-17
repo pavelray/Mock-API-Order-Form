@@ -1,0 +1,158 @@
+USE [React_Form_Data]
+GO
+
+/****** Object:  Table [dbo].[FormData]    Script Date: 9/16/2019 4:07:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FormData](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CreatedDate] [date] NULL,
+ CONSTRAINT [PK_FormData] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+USE [React_Form_Data]
+GO
+
+/****** Object:  Table [dbo].[BillingAddress]    Script Date: 9/16/2019 4:07:53 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[BillingAddress](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FullName] [varchar](50) NULL,
+	[AddressLine1] [varchar](50) NULL,
+	[AddressLine2] [varchar](50) NULL,
+	[City] [varchar](50) NULL,
+	[State] [varchar](50) NULL,
+	[Country] [varchar](50) NULL,
+	[Pincode] [varchar](50) NULL,
+	[ContactNo] [varchar](50) NULL,
+	[IsSameAsShipping] [bit] NULL,
+	[FormId] [int] NULL,
+ CONSTRAINT [PK_Address] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[BillingAddress]  WITH CHECK ADD  CONSTRAINT [FK_BillingAddress_FormData] FOREIGN KEY([Id])
+REFERENCES [dbo].[FormData] ([Id])
+GO
+
+ALTER TABLE [dbo].[BillingAddress] CHECK CONSTRAINT [FK_BillingAddress_FormData]
+GO
+
+
+USE [React_Form_Data]
+GO
+
+/****** Object:  Table [dbo].[OrderDetails]    Script Date: 9/16/2019 4:08:03 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[OrderDetails](
+	[Price] [int] NULL,
+	[Quantity] [int] NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FormId] [int] NULL,
+ CONSTRAINT [PK_OrderDetails] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[OrderDetails]  WITH CHECK ADD  CONSTRAINT [FK_OrderDetails_FormData] FOREIGN KEY([Id])
+REFERENCES [dbo].[FormData] ([Id])
+GO
+
+ALTER TABLE [dbo].[OrderDetails] CHECK CONSTRAINT [FK_OrderDetails_FormData]
+GO
+
+
+USE [React_Form_Data]
+GO
+
+/****** Object:  Table [dbo].[ShippingAddress]    Script Date: 9/16/2019 4:08:12 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ShippingAddress](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FullName] [varchar](50) NULL,
+	[AddressLine1] [varchar](50) NULL,
+	[AddressLine2] [varchar](50) NULL,
+	[City] [varchar](50) NULL,
+	[State] [varchar](50) NULL,
+	[Country] [varchar](50) NULL,
+	[Pincode] [varchar](50) NULL,
+	[ContactNo] [varchar](50) NULL,
+	[FormId] [int] NULL,
+ CONSTRAINT [PK_ShippingAddress] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ShippingAddress]  WITH CHECK ADD  CONSTRAINT [FK_ShippingAddress_FormData] FOREIGN KEY([Id])
+REFERENCES [dbo].[FormData] ([Id])
+GO
+
+ALTER TABLE [dbo].[ShippingAddress] CHECK CONSTRAINT [FK_ShippingAddress_FormData]
+GO
+
+
+USE [React_Form_Data]
+GO
+
+/****** Object:  Table [dbo].[Specifications]    Script Date: 9/16/2019 4:08:21 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Specifications](
+	[ActualThickness] [float] NULL,
+	[ActualLength] [float] NULL,
+	[ActualWidth] [float] NULL,
+	[SeriesName] [varchar](50) NULL,
+	[Type] [varchar](50) NULL,
+	[Warranty] [varchar](50) NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FormId] [int] NULL,
+ CONSTRAINT [PK_Specifications] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Specifications]  WITH CHECK ADD  CONSTRAINT [FK_Specifications_FormData] FOREIGN KEY([Id])
+REFERENCES [dbo].[FormData] ([Id])
+GO
+
+ALTER TABLE [dbo].[Specifications] CHECK CONSTRAINT [FK_Specifications_FormData]
+GO
+
+
